@@ -4,9 +4,11 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                            controllers.HomeController.index
 
-POST   /                            controllers.HomeController.doLogin
+POST    /                            controllers.HomeController.doPayment
+
+GET     /histories                   controllers.HomeController.histories
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

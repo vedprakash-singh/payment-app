@@ -1,0 +1,29 @@
+@(message: String, payments: Seq[domains.Payment])
+
+@main(message) {
+    <div class="payment-info">
+        <table style="width:100%">
+            <tr>
+                <th>Name</th>
+                <th>Date </th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Fee</th>
+                <th>Total</th>
+            </tr>
+            @payments.map { payment =>
+                <tr>
+                    <td>@payment.name</td>
+                    <td>@payment.date </td>
+                    <td>@payment.status </td>
+                    <td>@payment.amount </td>
+                    <td>@payment.fee </td>
+                    <td>@payment.total </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        <a href="/" >Make another payment</a>
+    </div>
+}

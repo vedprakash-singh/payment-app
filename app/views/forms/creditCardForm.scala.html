@@ -1,8 +1,14 @@
-@(message: String)
+@(message: String)(implicit flash: Flash)
 
 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+    <div style="color: red;">
+        @flash.get("ERROR").getOrElse("").split(",").map{error =>
+            @error
+            <br>
+        }
+    </div>
     <div class="payment-info">
-        <form method="post" name="paymentForm" id="paymentForm" action="@routes.HomeController.doLogin()">
+        <form method="post" name="paymentForm" id="paymentForm" action="@routes.HomeController.doPayment()">
             <div class="tab-for">
                 <h5>ENTER AMOUNT</h5>
                 <input type="text" value="" name="amount" id="amount" required>
@@ -14,11 +20,19 @@
             <div class="transaction">
                 <div class="tab-form-left user-form">
                     <h5>EXPIRATION</h5>
-                    <input type="text" value="" name="expMMYY" id="expMMYY" placeholder="MM-YY" required>
+                    <ul>
+                        <li>
+                            <input type="number" class="text_box" type="text" value="6" name ="expM" id ="expM" min="1" />
+                        </li>
+                        <li>
+                            <input type="number" class="text_box" type="text" value="1988" name ="expY" id ="expY" min="1" />
+                        </li>
+
+                    </ul>
                 </div>
                 <div class="tab-form-right user-form-rt">
                     <h5>CVV NUMBER</h5>
-                    <input type="text" value="xxx" placeholder="***"name="cvvNo" id="cvvNo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'xxxx';}" required="">
+                    <input type="text" value="xxxx" name="cvvNo" id="cvvNo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'xxxx';}" required="">
                 </div>
                 <div class="clear"></div>
             </div>

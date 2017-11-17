@@ -2,11 +2,12 @@ package domains
 
 case class Payment
 (
-  id: Long,
+  id: Option[Int] = None,
   name: String,
   amount: Double,
   cardNo: Long,
-  expMMYY: Int,
+  expM: Int,
+  expY: Int,
   cvvNo: Int,
   token: String,
   status: String,

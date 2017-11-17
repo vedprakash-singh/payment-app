@@ -1,0 +1,36 @@
+@(message: String, payment: domains.Payment)
+
+@main(message) {
+    <div class="payment-info">
+        <h3 >Thank you! Your payment was processed successfully.</h3></br>
+        <table style="width:100%">
+            <tr>
+                <th>Name</th>
+                <th>@payment.name</th>
+            </tr>
+            <tr>
+                <th>Date </th>
+                <th>@payment.date </th>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <th>@payment.status </th>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <th>@payment.amount </th>
+            </tr>
+            <tr>
+                <th>Fee</th>
+                <th>@payment.fee </th>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>@payment.total </th>
+            </tr>
+        </table>
+        <br />
+        <a href="/" >Make another payment</a>
+        <a href="/histories" >Payment History</a>
+    </div>
+}

@@ -31,32 +31,42 @@ class HomeController @Inject()
     Ok(views.html.index("Primoris | Payment | APP"))
   }
 
-  def doLogin = Action.async { implicit request: Request[AnyContent] =>
+  def doPayment = Action.async { implicit request: Request[AnyContent] =>
     paymentForm.bindFromRequest.fold(
       formWithErrors => {
         // binding failure, you retrieve the form containing errors:
-        Logger.error("form containing errors" + formWithErrors.errors)
-        Future.successful(BadRequest(views.html.index("Primoris | Payment | APP")))
+        Logger.error("form containing errors" + formWithErrors)
+        Future.successful {
+          Redirect(routes.HomeController.index()).flashing("ERROR" -> "Please check the required details below!")
+        }
       },
       paymentFormData => {
         /* binding success, you get the actual value. */
         Logger.info("binding success : " + paymentFormData)
         paymentService.processPaymentRequest(paymentFormData).map { wsResponse =>
-        Logger.info("wsResponse : " + wsResponse)
+          Logger.info("wsResponse : " + wsResponse)
           wsResponse match {
-            case Right(payment) => Ok(payment.toString)
-            case Left(error) => Ok(error.mkString)
+            case Right(payment) => Ok(views.html.reciept("Primoris | Payment | APP", payment))
+            case Left(errors) => Redirect(routes.HomeController.index()).flashing("ERROR" -> errors.mkString(","))
+
           }
         }
       }
     )
   }
 
+  def histories() = Action.async { implicit request: Request[AnyContent] =>
+    paymentService.paymentHistory().map { payments =>
+      Ok(views.html.histories("Primoris | Payment | APP", payments))
+    }
+  }
+
   val paymentForm = Form(mapping(
     "amount" -> nonEmptyText,
     "name" -> nonEmptyText,
     "cardNo" -> longNumber,
-    "expMMYY" -> number,
+    "expM" -> number,
+    "expY" -> number,
     "cvvNo" -> number)
   (PaymentForm.apply)(PaymentForm.unapply))
 

@@ -18,39 +18,43 @@ class PaymentDAO @Inject()
 
   private val Payments = TableQuery[PaymentsTable]
 
+  private val PaymentsInc = Payments.returning(Payments.map(_.id))
+
   def all(): Future[Seq[Payment]] = db.run(Payments.result)
 
-  def findById(id: Long): Future[Option[Payment]] = db.run(Payments.filter(p => p.id === id).result.headOption)
+  def findById(id: Int): Future[Option[Payment]] = db.run(Payments.filter(p => p.id === id).result.headOption)
 
-  def insert(payment: Payment): Future[Unit] = db.run(Payments += payment).map { _ => () }
+  def insert(payment: Payment): Future[Int] = db.run(PaymentsInc += payment)
 
-  private class PaymentsTable(tag: Tag) extends Table[Payment](tag, "PAYMENTS") {
+  private class PaymentsTable(tag: Tag) extends Table[Payment](tag, "payments") {
 
-    def id: Rep[Long] = column[Long]("ID", O.PrimaryKey)
+    def id: Rep[Int] = column[Int]("id", O.AutoInc, O.PrimaryKey)
 
-    def name: Rep[String] = column[String]("NAME")
+    def name: Rep[String] = column[String]("name")
 
-    def amount: Rep[Double] = column[Double]("AMOUNT")
+    def amount: Rep[Double] = column[Double]("amount")
 
-    def cardNo: Rep[Long] = column[Long]("CARD_NO")
+    def cardNo: Rep[Long] = column[Long]("card_no")
 
-    def expMMYY: Rep[Int] = column[Int]("EXP_MMYY")
+    def expMonth: Rep[Int] = column[Int]("exp_month")
 
-    def cvvNo: Rep[Int] = column[Int]("CVV_NO")
+    def expYear: Rep[Int] = column[Int]("exp_year")
 
-    def token: Rep[String] = column[String]("TOKEN")
+    def cvvNo: Rep[Int] = column[Int]("cvv_no")
 
-    def status: Rep[String] = column[String]("STATUS")
+    def token: Rep[String] = column[String]("token")
 
-    def date: Rep[String] = column[String]("P_DATE")
+    def status: Rep[String] = column[String]("status")
 
-    def fee: Rep[Double] = column[Double]("FEE")
+    def date: Rep[String] = column[String]("p_date")
 
-    def total: Rep[Double] = column[Double]("TOTAL")
+    def fee: Rep[Double] = column[Double]("fee")
 
-    def transId: Rep[String] = column[String]("TRANS_ID")
+    def total: Rep[Double] = column[Double]("total")
 
-    def * = (id, name, amount, cardNo, expMMYY, cvvNo, token, status, date, fee, total, transId) <>
+    def transId: Rep[String] = column[String]("trans_id")
+
+    def * = (id.?, name, amount, cardNo, expMonth, expYear, cvvNo, token, status, date, fee, total, transId) <>
       (Payment.tupled, Payment.unapply)
   }
 
