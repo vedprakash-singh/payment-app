@@ -34,9 +34,7 @@ class PaymentDAO @Inject()
 
     def cardNo: Rep[Long] = column[Long]("CARD_NO")
 
-    def expMonth: Rep[Int] = column[Int]("EXP_MONTH")
-
-    def expYear: Rep[Int] = column[Int]("EXP_YEAR")
+    def expMMYY: Rep[Int] = column[Int]("EXP_MMYY")
 
     def cvvNo: Rep[Int] = column[Int]("CVV_NO")
 
@@ -52,7 +50,7 @@ class PaymentDAO @Inject()
 
     def transId: Rep[String] = column[String]("TRANS_ID")
 
-    def * = (id, name, amount, cardNo, expMonth, expYear, cvvNo, token, status, date, fee, total, transId) <>
+    def * = (id, name, amount, cardNo, expMMYY, cvvNo, token, status, date, fee, total, transId) <>
       (Payment.tupled, Payment.unapply)
   }
 

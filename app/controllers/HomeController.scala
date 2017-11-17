@@ -40,9 +40,9 @@ class HomeController @Inject()
       },
       paymentFormData => {
         /* binding success, you get the actual value. */
-        //Logger.info("binding success : " + paymentFormData)
+        Logger.info("binding success : " + paymentFormData)
         paymentService.processPaymentRequest(paymentFormData).map { wsResponse =>
-        //  Logger.info("wsResponse : " + wsResponse)
+        Logger.info("wsResponse : " + wsResponse)
           wsResponse match {
             case Right(payment) => Ok(payment.toString)
             case Left(error) => Ok(error.mkString)
@@ -56,8 +56,7 @@ class HomeController @Inject()
     "amount" -> nonEmptyText,
     "name" -> nonEmptyText,
     "cardNo" -> longNumber,
-    "expM" -> number,
-    "expY" -> number,
+    "expMMYY" -> number,
     "cvvNo" -> number)
   (PaymentForm.apply)(PaymentForm.unapply))
 

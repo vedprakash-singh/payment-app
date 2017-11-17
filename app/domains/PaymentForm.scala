@@ -5,8 +5,7 @@ case class PaymentForm
   amount: String,
   name: String,
   cardNo: Long,
-  expM: Int,
-  expY: Int,
+  expMMYY: Int,
   cvvNo: Int
 ) {
 

@@ -14,19 +14,11 @@
             <div class="transaction">
                 <div class="tab-form-left user-form">
                     <h5>EXPIRATION</h5>
-                    <ul>
-                        <li>
-                            <input type="number" class="text_box" type="text" value="6" name ="expM" id ="expM" min="1" />
-                        </li>
-                        <li>
-                            <input type="number" class="text_box" type="text" value="1988" name ="expY" id ="expY" min="1" />
-                        </li>
-
-                    </ul>
+                    <input type="text" value="" name="expMMYY" id="expMMYY" placeholder="MM-YY" required>
                 </div>
                 <div class="tab-form-right user-form-rt">
                     <h5>CVV NUMBER</h5>
-                    <input type="text" value="xxxx" name="cvvNo" id="cvvNo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'xxxx';}" required="">
+                    <input type="text" value="xxx" placeholder="***"name="cvvNo" id="cvvNo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'xxxx';}" required="">
                 </div>
                 <div class="clear"></div>
             </div>
