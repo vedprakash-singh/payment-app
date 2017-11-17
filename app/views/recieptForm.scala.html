@@ -1,0 +1,59 @@
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+@import play.api.libs.json.Json
+@(message: String)
+
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("payment") {
+<div class="payment-info">
+    <form method="post" name="paymentForm" id="paymentForm" action="@routes.HomeController.doLogin()">
+    <head>
+        <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+    </head>
+        <h3 >Thank you! Your payment was processed successfully.</h3></br>
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Address </th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th>state</th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th>Card Number</th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th>Expiration</th>
+            <th> </th>
+        </tr>
+    </table>
+
+    </body>
+        <input type="submit" value="RePayment" >
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+           href="http://localhost:9000/" download="Payment.pdf">Download</a>
+    </form>
+</div>
+
+}

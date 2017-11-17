@@ -1,0 +1,15 @@
+@(message: String)
+
+@tabLi(itemNumber: Int, tabNumber: Int, label: String) = {
+    <li class="resp-tab-item" aria-controls="tab_item-@itemNumber" role="tab">
+        <span><label class="pic@tabNumber"></label>@label</span>
+    </li>
+}
+
+<ul class="resp-tabs-list">
+    @tabLi(0, 1, "Credit Card")
+    @tabLi(1, 3, "Net Banking")
+    @tabLi(2, 4, "PayPal")
+    @tabLi(3, 2, "Debit Card")
+    <div class="clear"></div>
+</ul>

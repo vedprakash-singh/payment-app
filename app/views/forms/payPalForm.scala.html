@@ -1,0 +1,32 @@
+@(message: String)
+
+<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+    <div class="payment-info">
+        <div class="login-tab">
+            <div class="user-login">
+                <h2>Login</h2>
+
+                <form>
+                    <input type="text" value="name@@email.com" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'name@@email.com';}" required="">
+                    <input type="password" value="PASSWORD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'PASSWORD';}" required="">
+                    <div class="user-grids">
+                        <div class="user-left">
+                            <div class="single-bottom">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox"  id="brand1" value="">
+                                        <label for="brand1"><span></span>Remember me?</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-right">
+                            <input type="submit" value="LOGIN">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
